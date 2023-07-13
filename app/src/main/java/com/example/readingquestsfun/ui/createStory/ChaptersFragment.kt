@@ -66,7 +66,7 @@ class ChaptersFragment : Fragment() {
         }
 
         _viewModel.storyModel.observe(viewLifecycleOwner) { story ->
-            toolbar.title = "Редактировать: ${story.title}"
+            toolbar.title = "Редактировать   : ${story.title}"
             _binding.tvStoryName.text = story.title
             _binding.tvStoryAuthor.text = story.author
             _binding.tvStoryDescr.text = story.description
