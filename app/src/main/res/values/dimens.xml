@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="box_radius_standart">20dp</dimen>
+    <dimen name="box_stroke_standart">2dp</dimen>
+    <dimen name="box_margin_content_inside_standart">10dp</dimen>
+    <dimen name="margin_login_screen">20dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="toolbar_button_dimens">30dp</dimen>
+</resources>

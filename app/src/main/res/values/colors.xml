@@ -6,12 +6,20 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
     <color name="color_surface_day">#ecdacc</color>
     <color name="color_text_day">#1b2a28</color>
     <color name="color_accent_day">#d0b87f</color>
     <color name="color_border_day">#457060</color>
     <color name="color_element_day">#07363f</color>
+
+    <color name="cyan">#00FFFF</color>
+
+    <color name="primary_1">#e17f49</color>
+    <color name="accent_1">#C54A07</color>
+    <color name="primary_2">#343434</color>
+    <color name="secondary_1">#d6d6d6</color>
+    <color name="dark_grey">#bbbbbb</color>
+    <color name="white">#efefef</color>
 
 </resources>

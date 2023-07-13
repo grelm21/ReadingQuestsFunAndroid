@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:context=".ui.createStory.AdminActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="HJello">
+
+                <ImageView
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="@dimen/toolbar_button_dimens"
+                    android:layout_height="@dimen/toolbar_button_dimens"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/baseline_arrow_forward_ios_24" />
+
+                <ImageView
+                    android:id="@+id/btn_edit"
+                    android:layout_width="@dimen/toolbar_button_dimens"
+                    android:layout_height="@dimen/toolbar_button_dimens"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/baseline_edit_24" />
+
+                <ImageView
+                    android:id="@+id/btn_delete"
+                    android:layout_width="@dimen/toolbar_button_dimens"
+                    android:layout_height="@dimen/toolbar_button_dimens"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/baseline_delete_24" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_create_story"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>
