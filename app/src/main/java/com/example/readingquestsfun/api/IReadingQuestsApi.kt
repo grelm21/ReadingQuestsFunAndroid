@@ -43,6 +43,9 @@ interface IReadingQuestsApi {
     @DELETE("api/story/delete/{id}")
     fun deleteStory(@Path("id") id: String): Call<ResponseBody>
 
+    @GET("api/story/get-all")
+    suspend fun getAllStories(): Response<List<StoryModel>>
+
     companion object {
         const val BASE_URL = "http://readingquests.fun:3015/"
     }

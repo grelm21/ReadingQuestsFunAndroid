@@ -48,7 +48,7 @@ val networkModule = module {
 val repoModule = module {
     single { LoginRepo(get(), get()) }
     single { StoryEditRepo(get(), get()) }
-    single { CurrentReadingRepo(get()) }
+    single { CurrentReadingRepo(get(), get()) }
 }
 
 val viewModelModule = module {
