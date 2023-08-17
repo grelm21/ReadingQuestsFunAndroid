@@ -10,6 +10,9 @@ import java.io.IOException
 
 abstract class BaseRepo {
 
+    /**
+     * базовый репо для получения респонса обернутого в Resource
+     */
     suspend fun <T> apiResponse(apiToCall: suspend () -> Response<T>): Resource<T>{
 
         return withContext(Dispatchers.IO) {
@@ -36,6 +39,9 @@ abstract class BaseRepo {
         }
     }
 
+    /**
+     * базовый репо на запрос
+     */
     suspend fun <T> apiCall(apiToCall: suspend () -> Call<T>): Resource<T> {
         return withContext(Dispatchers.IO) {
             try {

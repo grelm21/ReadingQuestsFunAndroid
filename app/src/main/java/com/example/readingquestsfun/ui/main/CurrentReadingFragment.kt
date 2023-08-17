@@ -26,11 +26,25 @@ class CurrentReadingFragment : Fragment() {
 
     private lateinit var _binding: FragmentCurrentReadingBinding
     private val _viewModel: CurrentReadingViewModel by activityViewModel()
-    private val _godModeStoriesAdapter by lazy{GodModeStoriesAdapter()}
+    private val _swipeHandler by lazy {
+        object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                val itemIndex = viewHolder.adapterPosition
+                Snackbar.make(
+                    requireView(), "Удалить историю?", Snackbar.LENGTH_SHORT
+                ).setAction("Удалить") {
+                    _viewModel.delete(_godModeStoriesAdapter.currentList[itemIndex]._id)
+                    _godModeStoriesAdapter.notifyItemRemoved(itemIndex)
+                }.show()
+            }
+        }
+    }
+    
+    private val _godModeStoriesAdapter by lazy { GodModeStoriesAdapter() }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCurrentReadingBinding.inflate(inflater)
         return _binding.root
@@ -41,16 +55,12 @@ class CurrentReadingFragment : Fragment() {
 
         _binding.rvStories.adapter = _godModeStoriesAdapter
 
-        val swipeHandler = object : SwipeToDeleteCallback(requireContext()){
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                Toast.makeText(requireContext(), "ok", Toast.LENGTH_SHORT).show()
-            }
-        }
 
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+
+        val itemTouchHelper = ItemTouchHelper(_swipeHandler)
         itemTouchHelper.attachToRecyclerView(_binding.rvStories)
 
-        _viewModel.allStories.observe(viewLifecycleOwner){
+        _viewModel.allStories.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
 
@@ -65,7 +75,27 @@ class CurrentReadingFragment : Fragment() {
                 }
             }
         }
-        
+
+        _viewModel.deleteStory.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Loading -> {
+//                    _binding.flLoading.visibility = View.VISIBLE
+                }
+
+                is Resource.Success -> {
+                    Snackbar.make(
+                        requireView(), "Удалено", Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+
+                is Resource.Error -> {
+                    Snackbar.make(
+                        requireView(), it.message.toString(), Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
         _viewModel.getAllStories()
     }
 
