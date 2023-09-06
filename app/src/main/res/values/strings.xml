@@ -45,4 +45,12 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="dialog_loot_btn_accept_not_stats">Взять</string>
+    <string name="dialog_condition_btn_dismiss">Пожалуй нет</string>
+    <string name="dialog_condition_btn_accept">Иду дальше</string>
+    <string name="dialog_demo_btn_accept">Toss a coin</string>
+    <string name="dialog_demo_btn_dismiss">Позже</string>
+    <string name="demo_thanks_for_reading">Спасибо за интерес!</string>
+    <string name="demo_text">Чтобы читать дальше, поблагодарите автора и внесите ему на счет чеканную монету.</string>
+    <string name="dialog_loot_btn_accept_stats">Ок</string>
 </resources>

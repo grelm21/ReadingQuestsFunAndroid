@@ -12,9 +12,11 @@ data class StoryModel(
     @SerializedName("description")
     val description: String,
     @SerializedName("chapterCount")
-    val chapterCount: Int,
+    val chapter_count: Int,
     @SerializedName("completed")
     val completed: Boolean,
     @SerializedName("published")
-    val published: Boolean
+    val published: Boolean,
+    @SerializedName("chapters")
+    val chapters: List<String>
 )

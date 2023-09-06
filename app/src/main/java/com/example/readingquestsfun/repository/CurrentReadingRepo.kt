@@ -11,7 +11,7 @@ class CurrentReadingRepo(private val _prefs: SharedPreference, private val _api:
     /**
      * получаем бульку на права адим\не админ из префоф
      */
-    fun getAdminRights(): Boolean{
+    fun getAdminRights(): String?{
         return _prefs.getAdminRightFromPref()
     }
 

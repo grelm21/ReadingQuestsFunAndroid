@@ -10,7 +10,7 @@ import com.example.readingquestsfun.utils.BaseViewHolder
 import com.example.readingquestsfun.utils.RVAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class GodModeStoriesAdapter() :
+class GodModeStoriesAdapter(private val _onClick: (StoryModel) -> Unit) :
     RVAdapter<StoryModel, GodModeStoriesAdapter.GodModeStoriesViewHolder>() {
 
     inner class GodModeStoriesViewHolder(view: View) : BaseViewHolder<StoryModel>(view) {
@@ -24,6 +24,10 @@ class GodModeStoriesAdapter() :
             _name.text = data.title
             _author.text = data.author
             _description.text = data.description
+
+            itemView.setOnClickListener {
+                _onClick(data)
+            }
         }
     }
 

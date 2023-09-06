@@ -18,7 +18,7 @@ class CurrentReadingViewModel(private val _repo: CurrentReadingRepo): ViewModel(
     private val _deleteStory = MutableLiveData<Resource<ResponseBody>>()
     val deleteStory = _deleteStory
 
-    fun getAdminRights(): Boolean{
+    fun getAdminRights(): String?{
         return _repo.getAdminRights()
     }
 

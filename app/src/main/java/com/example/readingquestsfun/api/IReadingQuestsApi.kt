@@ -1,5 +1,8 @@
 package com.example.readingquestsfun.api
 
+import com.example.readingquestsfun.models.ChapterModel
+import com.example.readingquestsfun.models.ItemModel
+import com.example.readingquestsfun.models.ReadingModel
 import com.example.readingquestsfun.models.StoryModel
 import com.example.readingquestsfun.models.UserLogin
 import okhttp3.ResponseBody
@@ -18,11 +21,19 @@ interface IReadingQuestsApi {
     /**
      * получаем логин и пароль пользователя
      */
-    @GET("api/user/login")
+//    @FormUrlEncoded
+    @GET("api/auth/login")
     suspend fun login(
         @Query("login") login: String,
         @Query("password") password: String
-    ): Response<List<UserLogin>>
+    ): Response<UserLogin>
+
+    @FormUrlEncoded
+    @POST("api/auth/signup")
+    fun signup(
+        @Field("login") login: String,
+        @Field("password") password: String
+    ): Call<UserLogin>
 
     /**
      * получаем историю
@@ -66,6 +77,15 @@ interface IReadingQuestsApi {
      */
     @GET("api/story/get-all")
     suspend fun getAllStories(): Response<List<StoryModel>>
+
+    @GET("api/story/get-chapter/{id}")
+    suspend fun getChapter(@Path("id") id: String): Response<ChapterModel>
+
+    @GET("api/story/get-user-items/{id}")
+    suspend fun getUserItems(@Path("id") id: String): Response<List<ItemModel>>
+
+    @POST("api/story/add-item-to-user")
+    fun addItemToUser(@Query("story_id") storyId: String, @Query("item_id") itemId: String, @Query("quantity") quantity: Int): Call<ReadingModel>
 
     companion object {
         const val BASE_URL = "http://readingquests.fun:3015/"

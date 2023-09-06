@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         _binding.bottomNavView.setOnItemSelectedListener(_navListener)
 
-        if (_viewModel.getAdminRights()){
+        if (_viewModel.getAdminRights() == "ADMIN"){
             _binding.fabCreate.visibility = VISIBLE
             toolbar.findViewById<SwitchMaterial>(R.id.switch_thumb).visibility = VISIBLE
         }else{

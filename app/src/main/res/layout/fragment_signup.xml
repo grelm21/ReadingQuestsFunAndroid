@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/back_new"
-        tools:context=".ui.login.LoginFragment">
+        tools:context=".ui.login.SignupFragment">
 
         <TextView
             android:id="@+id/tv_welcome"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Добро пожаловать в ReadingQuests"
+            android:text="Зарегистироваться в ReadingQuests"
             android:textColor="@color/primary_2"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -27,7 +27,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/login_fields_layout"
             android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_login_screen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginVertical="20dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/login_input_layout"
@@ -69,7 +70,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/box_margin_content_inside_standart"
                         android:layout_marginBottom="20dp"
-                        android:text="grelm21"/>
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeErrorColor="@color/primary_1"
+                    android:hint="Email"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/primary_2">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/box_margin_content_inside_standart"
+                        android:layout_marginBottom="20dp"
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,8 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/box_margin_content_inside_standart"
-                        android:inputType="textPassword"
-                        android:text="watasinomail"/>
+                        android:inputType="textPassword" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,22 +125,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_login_screen"
-            android:text="Войти"/>
-
-        <TextView
-            android:id="@+id/btn_signup"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/btn_confirm"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Регистрация"
-            android:textSize="18sp"
-            android:textColor="@color/accent_1"
-            android:layout_marginTop="15sp"
-            android:gravity="center"
-            android:clickable="true"/>
+            android:text="Регистрация"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
