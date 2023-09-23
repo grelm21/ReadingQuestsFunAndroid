@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import com.example.readingquestsfun.R
 import com.example.readingquestsfun.databinding.FragmentStoryBinding
@@ -34,8 +35,6 @@ class StoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         _viewModel.story.observe(viewLifecycleOwner){story ->
             when(story){
                 is Resource.Loading -> {}
@@ -49,7 +48,11 @@ class StoryFragment : Fragment() {
             }
         }
 
-        _viewModel.getStory(_storyId!!)
+        _binding.btnClear.setOnClickListener {
+            _viewModel.clearProgress()
+        }
+
+//        _viewModel.getStory()
     }
 
     companion object{

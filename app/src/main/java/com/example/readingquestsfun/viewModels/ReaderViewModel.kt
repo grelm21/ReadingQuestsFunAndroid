@@ -8,13 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.readingquestsfun.models.ChapterConditionModel
 import com.example.readingquestsfun.models.ChapterModel
 import com.example.readingquestsfun.models.ItemModel
-import com.example.readingquestsfun.models.LootConditionModel
+import com.example.readingquestsfun.models.LootModel
 import com.example.readingquestsfun.models.StoryModel
 import com.example.readingquestsfun.repository.ReaderRepo
 import com.example.readingquestsfun.utils.Resource
 import kotlinx.coroutines.launch
 
-class ReaderViewModel(private val _repo: ReaderRepo) : ViewModel() {
+class ReaderViewModel(private val _repo: ReaderRepo, private val _storyId: String) : ViewModel() {
 
     private val _story = MutableLiveData<Resource<StoryModel>>()
     val story = _story
@@ -28,16 +28,20 @@ class ReaderViewModel(private val _repo: ReaderRepo) : ViewModel() {
     private val _userItems = MutableLiveData<Resource<List<ItemModel>>>()
     val userItems = _userItems
 
-    private val _reservedItems = mutableListOf<LootConditionModel>()
-    private val _reservedItemsMutable = MutableLiveData<List<LootConditionModel>>()
+    private val _reservedItems = mutableListOf<LootModel>()
+    private val _reservedItemsMutable = MutableLiveData<List<LootModel>>()
     val reservedItemsMutable = _reservedItemsMutable
 
     private val _conditionCheck = MutableLiveData<Boolean>(true)
     val conditionCheck = _conditionCheck
 
-    fun getStory(id: String) = viewModelScope.launch {
+    init {
+        getStory()
+    }
+
+    private fun getStory() = viewModelScope.launch {
         _story.postValue(Resource.Loading())
-        _story.postValue(_repo.getStory(id))
+        _story.postValue(_repo.getStory(_storyId))
     }
 
     fun getChapter(id: String) = viewModelScope.launch {
@@ -52,27 +56,30 @@ class ReaderViewModel(private val _repo: ReaderRepo) : ViewModel() {
         chapters.forEach { chapterId ->
             val chapter = _repo.getChapter(chapterId)
             if (chapter is Resource.Success) {
-                val condition = ChapterConditionModel(chapterId, chapter.data!!.condition)
-                listOfConditions.add(condition)
+
+                chapter.data!!.condition?.let {chapterCondition ->
+                    val condition = ChapterConditionModel(chapterId, chapterCondition)
+                    listOfConditions.add(condition)
+                }
             }
         }
         _conditions.postValue(listOfConditions)
         Log.i("CONDITIONS", listOfConditions.toString())
     }
 
-    fun getUserItems(storyId: String) = viewModelScope.launch {
+    fun getUserItems() = viewModelScope.launch {
 
         _userItems.postValue(Resource.Loading())
-        _userItems.postValue(_repo.getUserItems(storyId))
+        _userItems.postValue(_repo.getUserItems(_storyId))
     }
 
-    fun addItemToUser(storyId: String, itemId: String, quantity: Int) = viewModelScope.launch {
+    fun addItemToUser(itemId: String, quantity: Int) = viewModelScope.launch {
 
-        _repo.addItemToUser(storyId, itemId, quantity)
-        _repo.getUserItems("64f20d1c49ab400e70a414c2")
+        _repo.addItemToUser(_storyId, itemId, quantity)
+        _repo.getUserItems(_storyId)
     }
 
-    fun addReservedItem(reservedItem: LootConditionModel) {
+    fun addReservedItem(reservedItem: LootModel) {
         _reservedItems.add(reservedItem)
     }
 
@@ -94,14 +101,22 @@ class ReaderViewModel(private val _repo: ReaderRepo) : ViewModel() {
 //        _reservedItemsMutable.postValue(_reservedItems)
     }
 
-    fun checkCondition(condition: ChapterConditionModel, storyId: String) = viewModelScope.launch {
+    fun clearProgress() = viewModelScope.launch {
+        val clear = _repo.clearProgress(_storyId)
 
-        val userItems = _repo.getUserItems(storyId)
+        if (clear is Resource.Success) {
+            Log.i("CLEAR", clear.data.toString())
+        }
+    }
+
+    fun checkCondition(condition: ChapterConditionModel) = viewModelScope.launch {
+
+        val userItems = _repo.getUserItems(_storyId)
         val conditionUserItem = userItems.data!!.find { it._id == condition.condition.item_id }
 
         if (conditionUserItem != null) {
             _conditionCheck.postValue(conditionUserItem.quantity >= condition.condition.item.quantity)
-        }else{
+        } else {
             _conditionCheck.postValue(false)
         }
     }

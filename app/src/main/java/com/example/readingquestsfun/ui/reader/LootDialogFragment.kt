@@ -16,7 +16,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.readingquestsfun.R
 import com.example.readingquestsfun.databinding.FragmentLootDialogBinding
-import com.example.readingquestsfun.models.LootConditionModel
 import com.example.readingquestsfun.ui.MainActivity
 import com.example.readingquestsfun.viewModels.ReaderViewModel
 
@@ -80,18 +79,24 @@ class LootDialogFragment : DialogFragment() {
                     _binding.btnAccept.setOnClickListener {
                         loot.let {
                             _viewModel.addItemToUser(
-                                it!!.item.story_id,
-                                it.item_id,
+                                it!!.item_id,
                                 it.item.quantity
                             )
                         }
                         dismiss()
                     }
 
+//                    _binding.btnDismiss.setOnClickListener {
+//                        val loot = chapter?.data?.loot?.get(_index!!)
+//                        loot.let { _viewModel.addReservedItem(it!!) }
+//
+//                        dismiss()
+//                    }
+
                     /**
                      * в зависимотсти от типа лута кнопка dismiss может быть видна или нет
                      */
-                    with("ACTION") {
+                    with("STATISTICS") {
                         _binding.btnAccept.text =
                             if (loot?.item?.type == this) getString(R.string.dialog_loot_btn_accept_stats)
                             else getString(R.string.dialog_loot_btn_accept_not_stats)
@@ -119,9 +124,8 @@ class LootDialogFragment : DialogFragment() {
                 _viewModel.conditions.value.let { conditions ->
 
                     val conditionToCheck = conditions?.get(_index!!)!!
-                    val storyId = conditions[_index!!]!!.condition.item.story_id
 
-                    _viewModel.checkCondition(conditionToCheck, storyId)
+                    _viewModel.checkCondition(conditionToCheck)
 
                     /**
                      *  кнопка accept, если check: ADD то изменяем количество у юзера
@@ -130,12 +134,16 @@ class LootDialogFragment : DialogFragment() {
                     _binding.btnAccept.setOnClickListener {
                         if (conditions?.get(_index!!)!!.condition.check!! == "ADD") {
                             _viewModel.addItemToUser(
-                                conditions?.get(_index!!)?.condition?.item?.story_id!!,
                                 conditions[_index!!].condition.item_id,
                                 conditions[_index!!].condition.item.quantity
                             )
                         }
                         _viewModel.getChapter(conditions[_index!!].chapter_id)
+                        dismiss()
+                    }
+
+                    _binding.btnIgnore.setOnClickListener {
+                        _viewModel.getChapter(conditions[_index!!].condition.ignore_chapter_id)
                         dismiss()
                     }
 
@@ -177,12 +185,11 @@ class LootDialogFragment : DialogFragment() {
                     val reservedItem = reservedItems?.get(_index!!)
                     _binding.btnAccept.setOnClickListener {
                         _viewModel.addItemToUser(
-                            reservedItem!!.item.story_id,
-                            reservedItem.item_id,
+                            reservedItem!!.item_id,
                             reservedItem.item.quantity
                         )
                         dismiss()
-                        _viewModel.getUserItems(reservedItem!!.item.story_id)
+                        _viewModel.getUserItems()
                         _viewModel.removeReservedItem(_index!!)
                     }
 
@@ -213,6 +220,11 @@ class LootDialogFragment : DialogFragment() {
         /**
          *  кнопка dismiss всегда отменяет диалог, кроме случая, если LOOT - если отказываемсчя от лута, то он попадает в зарезервированные
          */
+
+        if (_info != "CONDITION"){
+            _binding.btnIgnore.visibility = GONE
+        }
+
         _binding.btnDismiss.setOnClickListener {
             with("LOOT") {
                 if (_info == this) {

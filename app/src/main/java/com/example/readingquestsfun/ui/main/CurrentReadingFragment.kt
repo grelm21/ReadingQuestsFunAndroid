@@ -23,12 +23,17 @@ class CurrentReadingFragment : Fragment() {
     private val _viewModel: CurrentReadingViewModel by activityViewModel()
 
     private val _godModeStoriesAdapter by lazy {
-        GodModeStoriesAdapter { story ->
-            Log.i("STORY_ID", story._id)
+        GodModeStoriesAdapter (_onClick = { story ->
             val intent = Intent(requireContext(), ReaderActivity::class.java)
             intent.putExtra("STORY_ID", story._id)
             startActivity(intent)
-        }
+        },
+        _onClickEdit = {story ->
+            val intent = Intent(requireContext(), AdminActivity::class.java)
+            intent.putExtra("IS_NEW", false)
+            intent.putExtra("STORY_ID", story._id)
+            startActivity(intent)
+        })
     }
 
     override fun onCreateView(

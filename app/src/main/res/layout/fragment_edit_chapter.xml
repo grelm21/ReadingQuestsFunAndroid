@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.createStory.EditChapterFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Заметка"
+                android:textAlignment="center" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_edit_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_layout_note"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="@dimen/margin_login_screen"
+                    android:focusedByDefault="false"
+                    android:hint="Текст"
+                    app:boxStrokeErrorColor="@color/accent_1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_buttons_note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_layout_note"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/btn_note_edit_submit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:text="Принять" />
+
+                    <Button
+                        android:id="@+id/btn_note_edit_cancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/secondary_1"
+                        android:text="отмена"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/btn_note_edit_submit"
+                        app:layout_constraintTop_toBottomOf="@id/et_layout_note" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Текст"
+                android:textAlignment="center" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_layout_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:focusedByDefault="false"
+                    android:hint="Текст"
+                    app:boxStrokeErrorColor="@color/accent_1"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/btn_text_edit_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="Принять"
+                    app:layout_constraintEnd_toStartOf="@id/btn_edit_cancel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/et_layout_text" />
+
+                <Button
+                    android:id="@+id/btn_edit_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:backgroundTint="@color/secondary_1"
+                    android:text="отмена"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btn_text_edit_submit"
+                    app:layout_constraintTop_toBottomOf="@id/et_layout_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_loot_condition"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Лут"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/btn_add_loot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Добавить лут" />
+
+                <FrameLayout
+                    android:id="@+id/fl_loot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_no_loot"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Пока лута нет" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Лут"
+                        android:textAlignment="center" />
+
+                    <Button
+                        android:id="@+id/btn_add_condition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Добавить условие" />
+
+                    <FrameLayout
+                        android:id="@+id/fl_condition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_no_condition"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_margin="20dp"
+                            android:visibility="gone"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="Пока условия нет" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cv_add_condition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            app:cardCornerRadius="10dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/et_layout_condition_quantity"
+                                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginHorizontal="20dp"
+                                        android:layout_marginTop="@dimen/margin_login_screen"
+                                        android:layout_weight="1"
+                                        android:focusedByDefault="false"
+                                        android:hint="Количество"
+                                        app:layout_constraintTop_toTopOf="parent">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/et_condition_quantity"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:inputType="number" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <Spinner
+                                        android:id="@+id/spinner_condition_item"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="20dp"
+                                        android:layout_weight="2" />
+
+                                </LinearLayout>
+
+                                <Spinner
+                                    android:id="@+id/spinner_condition_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginTop="20dp" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/et_layout_condition_text"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:layout_marginTop="@dimen/margin_login_screen"
+                                    android:layout_marginBottom="20dp"
+                                    android:focusedByDefault="false"
+                                    android:hint="Условие"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/et_condition_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_demo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Демо" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switch_publish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Опубликовать" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

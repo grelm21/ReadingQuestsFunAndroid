@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:background="@color/secondary_1"
         android:orientation="vertical"
-        tools:context=".ui.createStory.ChaptersFragment">
+        tools:context=".ui.createStory.ChaptersFragment"
+        android:animateLayoutChanges="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -114,20 +115,29 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="@dimen/margin_login_screen">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_chapters"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/rv_item_story_chapters"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Пока глав не добавлено"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
 
-            </androidx.cardview.widget.CardView>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -145,6 +155,69 @@
                 android:indeterminateTint="@color/primary_1"/>
 
         </FrameLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_extended"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/primary_1"
+            app:icon="@drawable/baseline_add_24"
+            android:text="Добавить"
+            android:animateLayoutChanges="true"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_chapter"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/fab_extended"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/primary_1"
+            android:src="@drawable/baseline_book_24"
+            app:fabCustomSize="60dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/fab_chapter_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/fab_chapter"
+            app:layout_constraintBottom_toBottomOf="@id/fab_chapter"
+            app:layout_constraintEnd_toStartOf="@id/fab_chapter"
+            android:layout_marginEnd="10dp"
+            android:text="Добавить главу"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_item"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toTopOf="@id/fab_chapter"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/primary_1"
+            android:src="@drawable/baseline_menu_24"
+            app:fabCustomSize="60dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/fab_item_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/fab_item"
+            app:layout_constraintBottom_toBottomOf="@id/fab_item"
+            app:layout_constraintEnd_toStartOf="@id/fab_item"
+            android:layout_marginEnd="10dp"
+            android:text="Добавить предмет"
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

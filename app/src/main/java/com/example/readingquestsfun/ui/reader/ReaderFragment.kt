@@ -70,7 +70,7 @@ class ReaderFragment : Fragment() {
                         /**
                          * получаем айтемы юзера
                          */
-                        _viewModel.getUserItems(it.story_id)
+                        _viewModel.getUserItems()
                         _viewModel.getConditions(it.next_chapter_id)
 
                         /**

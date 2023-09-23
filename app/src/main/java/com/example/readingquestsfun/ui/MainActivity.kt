@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         _binding.fabCreate.setOnClickListener {
             val intent = Intent(this@MainActivity, AdminActivity::class.java)
             intent.putExtra("IS_NEW", true)
+            intent.putExtra("STORY_ID", '0')
             startActivity(intent)
         }
     }

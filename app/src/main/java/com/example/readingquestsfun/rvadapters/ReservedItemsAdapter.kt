@@ -5,19 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.readingquestsfun.R
-import com.example.readingquestsfun.models.LootConditionModel
+import com.example.readingquestsfun.models.LootModel
 import com.example.readingquestsfun.utils.BaseViewHolder
 import com.example.readingquestsfun.utils.RVAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class ReservedItemsAdapter(private val _onClick: (LootConditionModel, position: Int) -> Unit) :
-    RVAdapter<LootConditionModel, ReservedItemsAdapter.ReservedItemsViewHolder>() {
-    inner class ReservedItemsViewHolder(view: View) : BaseViewHolder<LootConditionModel>(view) {
+class ReservedItemsAdapter(private val _onClick: (LootModel, position: Int) -> Unit) :
+    RVAdapter<LootModel, ReservedItemsAdapter.ReservedItemsViewHolder>() {
+    inner class ReservedItemsViewHolder(view: View) : BaseViewHolder<LootModel>(view) {
 
         private val _descriptionLoot: TextView by lazy { itemView.findViewById(R.id.tv_description) }
 
         @ExperimentalCoroutinesApi
-        override fun bind(data: LootConditionModel) {
+        override fun bind(data: LootModel) {
             _descriptionLoot.text = data.text
 
             itemView.setOnClickListener {

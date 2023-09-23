@@ -10,10 +10,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class AdminActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityAdminBinding
-    private val _viewModel: StoryEditViewModel by viewModel()
+//    private val _viewModel: StoryEditViewModel by viewModel()
 
     private val isNew by lazy {
         intent.getBooleanExtra("IS_NEW", true)
+    }
+
+    private val _storyId by lazy {
+        intent.getStringExtra("STORY_ID")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +30,16 @@ class AdminActivity : AppCompatActivity() {
         val toolbar = _binding.toolbar
         toolbar.title
 
-        _viewModel.getViewModel()
+//        _viewModel.getViewModel()
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_create_story, EditStoryFragment.newInstance(isNew, null)).commit()
+        if(isNew) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_create_story, EditStoryFragment.newInstance(isNew, _storyId))
+                .commit()
+        }else{
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_create_story, ChaptersFragment.newInstance(_storyId))
+                .commit()
+        }
     }
 }

@@ -60,7 +60,7 @@ class EquipmentFragment : Fragment() {
         _binding.rvReserved.adapter = _reservedAdapter
 
         _viewModel.getReservedItems()
-        _viewModel.getUserItems("64f20d1c49ab400e70a414c2")
+        _viewModel.getUserItems()
 
 
         /**
@@ -70,11 +70,11 @@ class EquipmentFragment : Fragment() {
             when (userItems) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    val items = userItems.data!!.filter { it.type != "ACTION" }
+                    val items = userItems.data!!.filter { it.type != "STATISTICS" }
                     _itemsAdapter.submitList(items.toMutableList())
 //                    _itemsAdapter.notifyDataSetChanged()
 
-                    val statistics = userItems.data!!.filter { it.type == "ACTION" }
+                    val statistics = userItems.data!!.filter { it.type == "STATISTICS" }
                     _statisticsAdapter.submitList(statistics.toMutableList())
 //                    _statisticsAdapter.notifyDataSetChanged()
                 }

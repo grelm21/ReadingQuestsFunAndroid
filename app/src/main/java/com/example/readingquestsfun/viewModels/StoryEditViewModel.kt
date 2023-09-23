@@ -3,55 +3,41 @@ package com.example.readingquestsfun.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.readingquestsfun.models.ResponseModel
 import com.example.readingquestsfun.models.StoryModel
-import com.example.readingquestsfun.repository.StoryEditRepo
+import com.example.readingquestsfun.repository.EditStoryRepo
 import com.example.readingquestsfun.utils.Resource
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
-class StoryEditViewModel(private val _repo: StoryEditRepo): ViewModel() {
+class StoryEditViewModel(private val _repo: EditStoryRepo): ViewModel() {
 
-    private val _storyModelDraft = MutableLiveData<Resource<StoryModel>>()
-    val storyModelDraft = _storyModelDraft
+//    private val _storyModelDraft = MutableLiveData<Resource<StoryModel>>()
+//    val storyModelDraft = _storyModelDraft
 
-    private val _storyModel = MutableLiveData<StoryModel>()
+    private val _storyModel = MutableLiveData<Resource<StoryModel>>()
     val storyModel = _storyModel
 
-    private val _deleteStory = MutableLiveData<Resource<ResponseBody>>()
-    val deleteStory = _deleteStory
+//    private val _deleteStory = MutableLiveData<Resource<ResponseBody>>()
+//    val deleteStory = _deleteStory
 
     private val _editedStoryModel = MutableLiveData<Resource<StoryModel>>()
     val editedStoryModel = _editedStoryModel
 
-    fun getViewModel(){
-
-    }
+    private val _response = MutableLiveData<Resource<ResponseModel>>()
+    val response = _response
 
     fun getStory(id: String) = viewModelScope.launch {
-        _storyModelDraft.postValue(Resource.Loading())
-        val result = _repo.getStory(id)
-        _storyModelDraft.postValue(result)
+        _storyModel.postValue(Resource.Loading())
+        storyModel.postValue(_repo.getStory(id))
     }
 
     fun editStory(id: String, title: String, description: String) = viewModelScope.launch {
-        val result = _repo.editStory(id, title, description)
-        _editedStoryModel.postValue(result)
-        _storyModel.postValue(result.data!!)
+        _response.postValue(Resource.Loading())
+        _response.postValue(_repo.editStory(id, title, description))
     }
 
     fun addNewStory(title: String, descr: String) = viewModelScope.launch {
-        _storyModelDraft.postValue(Resource.Loading())
-        val result = _repo.addNewStory(title, descr)
-        _storyModelDraft.postValue(result)
-        _storyModel.postValue(result.data!!)
-    }
-
-    fun publish(id: String, publish: Boolean) = viewModelScope.launch {
-        _repo.publish(id, publish)
-    }
-
-    fun delete(id: String) = viewModelScope.launch {
-        _deleteStory.postValue(Resource.Loading())
-        _deleteStory.postValue(_repo.delete(id))
+        _response.postValue(Resource.Loading())
+        _response.postValue(_repo.addNewStory(title, descr))
     }
 }

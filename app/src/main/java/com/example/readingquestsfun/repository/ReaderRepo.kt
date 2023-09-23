@@ -6,6 +6,7 @@ import com.example.readingquestsfun.models.ItemModel
 import com.example.readingquestsfun.models.ReadingModel
 import com.example.readingquestsfun.models.StoryModel
 import com.example.readingquestsfun.utils.Resource
+import okhttp3.ResponseBody
 
 class ReaderRepo(private val _api: IReadingQuestsApi): BaseRepo() {
 
@@ -28,6 +29,12 @@ class ReaderRepo(private val _api: IReadingQuestsApi): BaseRepo() {
     suspend fun addItemToUser (storyId: String, itemId: String, quantity: Int): Resource<ReadingModel> {
         return apiCall {
             _api.addItemToUser(storyId, itemId, quantity)
+        }
+    }
+
+    suspend fun clearProgress(storyId: String): Resource<ResponseBody> {
+        return apiCall {
+            _api.clearProgress(storyId)
         }
     }
 }

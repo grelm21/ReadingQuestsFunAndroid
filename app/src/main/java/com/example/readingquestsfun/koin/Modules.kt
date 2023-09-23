@@ -5,13 +5,17 @@ import android.content.SharedPreferences
 import com.example.readingquestsfun.api.HeaderInterceptor
 import com.example.readingquestsfun.api.IReadingQuestsApi
 import com.example.readingquestsfun.api.IReadingQuestsApi.Companion.BASE_URL
+import com.example.readingquestsfun.repository.ChaptersRepo
 import com.example.readingquestsfun.repository.CurrentReadingRepo
+import com.example.readingquestsfun.repository.EditChapterRepo
+import com.example.readingquestsfun.repository.EditStoryRepo
 import com.example.readingquestsfun.repository.LoginRepo
 import com.example.readingquestsfun.repository.ReaderRepo
-import com.example.readingquestsfun.repository.StoryEditRepo
 import com.example.readingquestsfun.utils.SharedPreference
 import com.example.readingquestsfun.utils.SharedPreference.Constants.PREFERENCE_KEY
+import com.example.readingquestsfun.viewModels.ChaptersViewModel
 import com.example.readingquestsfun.viewModels.CurrentReadingViewModel
+import com.example.readingquestsfun.viewModels.EditChapterViewModel
 import com.example.readingquestsfun.viewModels.LoginViewModel
 import com.example.readingquestsfun.viewModels.ReaderViewModel
 import com.example.readingquestsfun.viewModels.StoryEditViewModel
@@ -49,16 +53,21 @@ val networkModule = module {
 
 val repoModule = module {
     single { LoginRepo(get(), get()) }
-    single { StoryEditRepo(get(), get()) }
     single { CurrentReadingRepo(get(), get()) }
     single { ReaderRepo(get()) }
+    single { EditStoryRepo(get()) }
+    single { ChaptersRepo(get()) }
+    single { EditChapterRepo(get()) }
 }
 
 val viewModelModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { StoryEditViewModel(get()) }
     viewModel { CurrentReadingViewModel(get()) }
-    viewModel { ReaderViewModel(get()) }
+    viewModel { ReaderViewModel(get(), get()) }
+    viewModel { ChaptersViewModel(get(), get()) }
+//    viewModel { EditChapterViewModel(get(), get(), get()) }
+    viewModel { (id: String?, editType: String) -> EditChapterViewModel(get(), id, editType) }
 }
 
 val preferencesModule = module {

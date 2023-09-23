@@ -10,7 +10,7 @@ import com.example.readingquestsfun.utils.BaseViewHolder
 import com.example.readingquestsfun.utils.RVAdapter
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class GodModeStoriesAdapter(private val _onClick: (StoryModel) -> Unit) :
+class GodModeStoriesAdapter(private val _onClick: (StoryModel) -> Unit, private val _onClickEdit: (StoryModel) -> Unit) :
     RVAdapter<StoryModel, GodModeStoriesAdapter.GodModeStoriesViewHolder>() {
 
     inner class GodModeStoriesViewHolder(view: View) : BaseViewHolder<StoryModel>(view) {
@@ -18,6 +18,7 @@ class GodModeStoriesAdapter(private val _onClick: (StoryModel) -> Unit) :
         private val _name: TextView by lazy{itemView.findViewById(R.id.tv_story_name)}
         private val _author: TextView by lazy{itemView.findViewById(R.id.tv_story_author)}
         private val _description: TextView by lazy{itemView.findViewById(R.id.tv_story_description)}
+        private val _edit: TextView by lazy{itemView.findViewById(R.id.btn_edit)}
 
         @ExperimentalCoroutinesApi
         override fun bind(data: StoryModel) {
@@ -27,6 +28,10 @@ class GodModeStoriesAdapter(private val _onClick: (StoryModel) -> Unit) :
 
             itemView.setOnClickListener {
                 _onClick(data)
+            }
+
+            _edit.setOnClickListener {
+                _onClickEdit(data)
             }
         }
     }

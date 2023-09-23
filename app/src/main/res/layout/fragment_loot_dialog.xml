@@ -68,16 +68,31 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_item_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/btn_dismiss"
+                app:layout_constraintBottom_toTopOf="@id/btn_ignore"
                 android:layout_marginTop="@dimen/margin_login_screen"
                 android:layout_marginBottom="20dp"
                 android:text="Взять"/>
 
             <TextView
-                android:id="@+id/btn_dismiss"
+                android:id="@+id/btn_ignore"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/btn_accept"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btn_dismiss"
+                android:text="Продолжить, не выполняя условие"
+                android:textSize="18sp"
+                android:textColor="@color/accent_1"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:clickable="true"/>
+
+            <TextView
+                android:id="@+id/btn_dismiss"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/btn_ignore"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -9,6 +9,11 @@ data class ChapterModel(
     val demo: Boolean,
     val published: Boolean,
     val level: Int,
-    val loot: List<LootConditionModel>,
-    val condition: LootConditionModel
+    val loot: List<LootModel>,
+    val condition: ConditionModel?
+)
+
+data class ResponseModel(
+    val message: String,
+    val _id: String
 )
