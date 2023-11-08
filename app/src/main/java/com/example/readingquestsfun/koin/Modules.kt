@@ -8,6 +8,7 @@ import com.example.readingquestsfun.api.IReadingQuestsApi.Companion.BASE_URL
 import com.example.readingquestsfun.repository.ChaptersRepo
 import com.example.readingquestsfun.repository.CurrentReadingRepo
 import com.example.readingquestsfun.repository.EditChapterRepo
+import com.example.readingquestsfun.repository.EditItemRepo
 import com.example.readingquestsfun.repository.EditStoryRepo
 import com.example.readingquestsfun.repository.LoginRepo
 import com.example.readingquestsfun.repository.ReaderRepo
@@ -16,6 +17,7 @@ import com.example.readingquestsfun.utils.SharedPreference.Constants.PREFERENCE_
 import com.example.readingquestsfun.viewModels.ChaptersViewModel
 import com.example.readingquestsfun.viewModels.CurrentReadingViewModel
 import com.example.readingquestsfun.viewModels.EditChapterViewModel
+import com.example.readingquestsfun.viewModels.EditItemDialogViewModel
 import com.example.readingquestsfun.viewModels.LoginViewModel
 import com.example.readingquestsfun.viewModels.ReaderViewModel
 import com.example.readingquestsfun.viewModels.StoryEditViewModel
@@ -58,6 +60,7 @@ val repoModule = module {
     single { EditStoryRepo(get()) }
     single { ChaptersRepo(get()) }
     single { EditChapterRepo(get()) }
+    single { EditItemRepo(get()) }
 }
 
 val viewModelModule = module {
@@ -66,8 +69,15 @@ val viewModelModule = module {
     viewModel { CurrentReadingViewModel(get()) }
     viewModel { ReaderViewModel(get(), get()) }
     viewModel { ChaptersViewModel(get(), get()) }
-//    viewModel { EditChapterViewModel(get(), get(), get()) }
-    viewModel { (id: String?, editType: String) -> EditChapterViewModel(get(), id, editType) }
+    viewModel { (storyId: String?, chapterId: String?, editType: String) ->
+        EditChapterViewModel(
+            get(),
+            storyId,
+            chapterId,
+            editType
+        )
+    }
+    viewModel { (storyId: String, itemId: String) -> EditItemDialogViewModel(get(), storyId, itemId) }
 }
 
 val preferencesModule = module {

@@ -8,4 +8,8 @@ data class ItemModel(
     val quantity: Int,
     val max: Int,
     val type: String
-)
+){
+    override fun toString(): String {
+        return name
+    }
+}

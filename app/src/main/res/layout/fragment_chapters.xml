@@ -6,140 +6,162 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:background="@color/secondary_1"
         android:orientation="vertical"
-        tools:context=".ui.createStory.ChaptersFragment"
-        android:animateLayoutChanges="true">
+        tools:context=".ui.createStory.ChaptersFragment">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/secondary_1"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="30dp">
+                android:layout_height="match_parent"
+                android:background="@color/secondary_1"
+                android:orientation="vertical">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/container_main_story"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_story_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        tools:text="Загадочная история коровы"
-                        android:textColor="@color/primary_1"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tv_story_author"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        tools:text="NikikMasan"
-                        android:textColor="@color/primary_1"
-                        android:textSize="10sp"
-                        android:textStyle="italic"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster"
-                        app:layout_constraintTop_toBottomOf="@id/tv_story_name" />
-
-                    <TextView
-                        android:id="@+id/tv_story_descr"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="@dimen/margin_login_screen"
-                        android:textAlignment="center"
-                        android:textColor="@color/primary_1"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/cv_poster"
-                        app:layout_constraintTop_toBottomOf="@id/tv_story_author"
-                        tools:text="@tools:sample/lorem" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cv_poster"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        app:cardCornerRadius="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:adjustViewBounds="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/no_poster2" />
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/check_publish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="@dimen/margin_login_screen"
-                android:buttonTint="@color/primary_1"
-                android:checked="true"
-                android:text="Опубликовать" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_login_screen"
-                android:text="Главы:"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="@dimen/margin_login_screen">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_chapters"
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:orientation="vertical"
-                    tools:listitem="@layout/rv_item_story_chapters"/>
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="30dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/container_main_story"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_story_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/primary_1"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cv_poster"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Загадочная история коровы" />
+
+                        <TextView
+                            android:id="@+id/tv_story_author"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/primary_1"
+                            android:textSize="10sp"
+                            android:textStyle="italic"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cv_poster"
+                            app:layout_constraintTop_toBottomOf="@id/tv_story_name"
+                            tools:text="NikikMasan" />
+
+                        <TextView
+                            android:id="@+id/tv_story_descr"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="@dimen/margin_login_screen"
+                            android:textAlignment="center"
+                            android:textColor="@color/primary_1"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/cv_poster"
+                            app:layout_constraintTop_toBottomOf="@id/tv_story_author"
+                            tools:text="@tools:sample/lorem" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cv_poster"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/no_poster2" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/check_publish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="@dimen/margin_login_screen"
+                    android:buttonTint="@color/primary_1"
+                    android:checked="true"
+                    android:text="Опубликовать" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Пока глав не добавлено"
-                    android:textSize="16sp"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="@dimen/margin_login_screen"
+                    android:text="Предметы:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-            </FrameLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_story_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"
+                    tools:listitem="@layout/rv_item_story_items"/>
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_login_screen"
+                    android:text="Главы:"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="@dimen/margin_login_screen">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_chapters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/rv_item_story_chapters" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Пока глав не добавлено"
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <FrameLayout
             android:id="@+id/fl_loading"
@@ -152,7 +174,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:indeterminateTint="@color/primary_1"/>
+                android:indeterminateTint="@color/primary_1" />
 
         </FrameLayout>
 
@@ -160,64 +182,64 @@
             android:id="@+id/fab_extended"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:animateLayoutChanges="true"
             android:backgroundTint="@color/primary_1"
-            app:icon="@drawable/baseline_add_24"
             android:text="Добавить"
-            android:animateLayoutChanges="true"/>
+            app:icon="@drawable/baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_chapter"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toTopOf="@id/fab_extended"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/primary_1"
             android:src="@drawable/baseline_book_24"
+            android:visibility="gone"
             app:fabCustomSize="60dp"
-            android:visibility="gone"/>
+            app:layout_constraintBottom_toTopOf="@id/fab_extended"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/fab_chapter_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/fab_chapter"
-            app:layout_constraintBottom_toBottomOf="@id/fab_chapter"
-            app:layout_constraintEnd_toStartOf="@id/fab_chapter"
             android:layout_marginEnd="10dp"
             android:text="Добавить главу"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/fab_chapter"
+            app:layout_constraintEnd_toStartOf="@id/fab_chapter"
+            app:layout_constraintTop_toTopOf="@id/fab_chapter" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_item"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            app:layout_constraintBottom_toTopOf="@id/fab_chapter"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/primary_1"
             android:src="@drawable/baseline_menu_24"
+            android:visibility="gone"
             app:fabCustomSize="60dp"
-            android:visibility="gone"/>
+            app:layout_constraintBottom_toTopOf="@id/fab_chapter"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/fab_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/fab_item"
-            app:layout_constraintBottom_toBottomOf="@id/fab_item"
-            app:layout_constraintEnd_toStartOf="@id/fab_item"
             android:layout_marginEnd="10dp"
             android:text="Добавить предмет"
             android:textStyle="bold"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/fab_item"
+            app:layout_constraintEnd_toStartOf="@id/fab_item"
+            app:layout_constraintTop_toTopOf="@id/fab_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

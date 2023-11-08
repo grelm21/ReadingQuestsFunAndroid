@@ -10,11 +10,14 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.readingquestsfun.R
 import com.example.readingquestsfun.databinding.FragmentChaptersBinding
 import com.example.readingquestsfun.rvadapters.StoryChaptersAdapter
+import com.example.readingquestsfun.rvadapters.StoryItemsAdapter
 import com.example.readingquestsfun.ui.MainActivity
 import com.example.readingquestsfun.utils.Resource
 import com.example.readingquestsfun.viewModels.ChaptersViewModel
@@ -23,6 +26,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.lang.Error
 
 class ChaptersFragment : Fragment() {
 
@@ -37,10 +41,29 @@ class ChaptersFragment : Fragment() {
     }
 
     private val _chaptersAdapter by lazy {
-        StoryChaptersAdapter { chapter ->
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_create_story, EditChapterFragment.newInstance("EDIT", chapter._id))
-                .addToBackStack("edit_chapter").commit()
+        StoryChaptersAdapter(
+            { chapter ->
+                parentFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragment_create_story,
+                        EditChapterFragment.newInstance("EDIT", chapter.story_id, chapter._id)
+                    )
+                    .addToBackStack("edit_chapter").commit()
+            },
+            { chapter ->
+                _viewModel.chapterDemo(chapter._id)
+            })
+    }
+
+    private val _itemsAdapter by lazy {
+        StoryItemsAdapter { item ->
+            EditItemDialogFragment.newInstance(
+                isNew = false,
+                fromChaptersScreen = true,
+                _storyId,
+                item._id
+            )
+                .show(childFragmentManager, "edit_item")
         }
     }
 
@@ -66,7 +89,7 @@ class ChaptersFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         _binding = FragmentChaptersBinding.inflate(layoutInflater)
@@ -84,6 +107,7 @@ class ChaptersFragment : Fragment() {
         toolbar.findViewById<ImageView>(R.id.btn_confirm).visibility = VISIBLE
 
         _binding.rvChapters.adapter = _chaptersAdapter
+        _binding.rvStoryItems.adapter = _itemsAdapter
 
 
         /**
@@ -110,8 +134,21 @@ class ChaptersFragment : Fragment() {
 
             fabChapter.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_create_story, EditChapterFragment.newInstance("NEW", _storyId))
+                    .replace(
+                        R.id.fragment_create_story,
+                        EditChapterFragment.newInstance("NEW", _storyId, null)
+                    )
                     .addToBackStack("new_chapter").commit()
+            }
+
+            fabItem.setOnClickListener {
+                EditItemDialogFragment.newInstance(
+                    isNew = true,
+                    fromChaptersScreen = true,
+                    _storyId,
+                    null
+                )
+                    .show(childFragmentManager, "new_item")
             }
         }
 
@@ -163,6 +200,17 @@ class ChaptersFragment : Fragment() {
 
                 is Resource.Loading -> {}
                 is Resource.Error -> {}
+            }
+        }
+
+        _viewModel.itemList.observe(viewLifecycleOwner) { items ->
+            when (items) {
+                is Resource.Success -> {
+                    _itemsAdapter.submitList(items.data!!.toMutableList())
+                }
+
+                is Resource.Error -> {}
+                is Resource.Loading -> {}
             }
         }
     }

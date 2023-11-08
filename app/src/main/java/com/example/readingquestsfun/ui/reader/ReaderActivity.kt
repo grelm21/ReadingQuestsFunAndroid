@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import com.example.readingquestsfun.R
 import com.example.readingquestsfun.databinding.ActivityMainBinding

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.readingquestsfun.models.ChapterModel
+import com.example.readingquestsfun.models.ItemModel
 import com.example.readingquestsfun.models.StoryModel
 import com.example.readingquestsfun.repository.ChaptersRepo
 import com.example.readingquestsfun.utils.Resource
@@ -19,9 +20,13 @@ class ChaptersViewModel(private val _repo: ChaptersRepo, private val _storyId: S
     private val _chapters = MutableLiveData<Resource<List<ChapterModel>>>()
     val chapters = _chapters
 
+    private val _itemsList = MutableLiveData<Resource<List<ItemModel>>>()
+    val itemList = _itemsList
+
     init {
         getStory()
         getStoryChapters()
+        getStoryItems()
     }
 
     private fun getStory() = viewModelScope.launch {
@@ -33,5 +38,13 @@ class ChaptersViewModel(private val _repo: ChaptersRepo, private val _storyId: S
     private fun getStoryChapters() = viewModelScope.launch {
         _chapters.postValue(Resource.Loading())
         _chapters.postValue(_repo.getStoryChapters(_storyId))
+    }
+
+    fun getStoryItems() = viewModelScope.launch {
+        _itemsList.postValue(_repo.getStoryItems(_storyId))
+    }
+
+    fun chapterDemo(chapterId: String) = viewModelScope.launch {
+        chapterId?.let { _repo.chapterDemo(it) }
     }
 }

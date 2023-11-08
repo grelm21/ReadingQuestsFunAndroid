@@ -11,7 +11,11 @@ data class ChapterModel(
     val level: Int,
     val loot: List<LootModel>,
     val condition: ConditionModel?
-)
+){
+    override fun toString(): String {
+        return note
+    }
+}
 
 data class ResponseModel(
     val message: String,

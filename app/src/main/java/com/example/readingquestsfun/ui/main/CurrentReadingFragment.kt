@@ -59,7 +59,7 @@ class CurrentReadingFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-
+                    Log.i("CHAPTERS_ERROR", it.message.toString())
                 }
             }
         }
